@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import 'antd/dist/antd.min.css'
 import { createStore, applyMiddleware} from 'redux'
 import rootReducer from './reducers'
 import { composeWithDevTools } from 'redux-devtools-extension'
