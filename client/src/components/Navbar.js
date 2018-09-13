@@ -1,11 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 const logo = require('../logo.svg')
 
 const Component = props => (
   <div className={'navbar ' + props.className}>
     <img src={logo} className="logo"/>
-    <a href=""> home </a>
+    {/* <a href=""> home </a> */}
+    <Link to="/login">Login</Link>
+    <Link to='register'>SignUp</Link>
   </div>
 )
 
@@ -19,7 +22,7 @@ const Navbar = styled(Component)`
   display: flex;
   align-items: center;
   padding: 0 30px;
-  background: #eee
+  background: #eee;
   .logo{
     margin-right: auto;
     height: 50px;
