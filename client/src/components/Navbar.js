@@ -6,9 +6,8 @@ const logo = require('../logo.svg')
 const Component = props => (
   <div className={'navbar ' + props.className}>
     <img src={logo} className="logo"/>
-    {/* <a href=""> home </a> */}
     <Link to="/login">Login</Link>
-    <Link to='register'>SignUp</Link>
+    <Link to='/register'>SignUp</Link>
   </div>
 )
 
