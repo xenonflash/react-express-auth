@@ -5,14 +5,19 @@ const logo = require('../logo.svg')
 
 const Component = props => (
   <div className={'navbar ' + props.className}>
-    <img src={logo} className="logo"/>
-    <Link to="/login">Login</Link>
-    <Link to='/register'>SignUp</Link>
+    <Link to="/" className="logo">
+      <img src={logo} />
+    </Link>
+    <div className="nav-menu">
+      <Link to="/login">Login</Link>
+      <Link to='/register'>SignUp</Link>
+    </div>
   </div>
 )
 
 const Navbar = styled(Component)`
   position: fixed;
+  z-index: 999;
   top: 0;
   left: 0;
   width: 100%;
@@ -24,7 +29,14 @@ const Navbar = styled(Component)`
   background: #eee;
   .logo{
     margin-right: auto;
-    height: 50px;
+    img{
+      height: 50px;
+    }
+  }
+  .nav-menu{
+    a{
+      padding: 0 20px
+    }
   }
 `
 
