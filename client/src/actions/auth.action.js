@@ -17,8 +17,18 @@ export function register(formValues) {
     dispatch({type: REGISTER_REQUEST})
     authApi.register(formValues).then(res => {
       dispatch({type: REGISTER_SUCCESS})
+      dispatch({type: SET_USER, user: res})
     }).catch(err => {
       dispatch({type: REGISTER_FAIL})
+    })
+  }
+}
+export function getUserInfo() {
+  return dispatch => {
+    authApi.getUserInfo().then(res => {
+      dispatch({type: SET_USER, user: res})
+    }).catch(err => {
+
     })
   }
 }

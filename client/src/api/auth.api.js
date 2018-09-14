@@ -6,4 +6,13 @@ api.login = param => axios({
   url: '/login',
   data: param,
 })
+api.getUserInfo = () => axios({
+  method: 'post',
+  url: '/getUserInfo'
+})
+api.register = param => axios({
+  method: 'post',
+  url: '/register',
+  data: param,
+})
 export default api
