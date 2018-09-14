@@ -1,11 +1,17 @@
 import express from "express"
 import CONFIG from './config'
 import { initDb } from './db'
-import routes from './controller'
+import controllers from './controller'
+import bodyParser from 'body-parser'
 
 const app = express()
+app.use(bodyParser.json())
 
-app.use(routes)
+
+app.use('/api', controllers)
+app.use((req, res) => {
+  res.json('404')
+})
 
 initDb(CONFIG.mongo).then(res => {
   app.listen(CONFIG.port, () => {console.log('statred at 8080')})
