@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
 import { Input, Button, Form, Icon } from 'antd'
 import _isEmpty from 'lodash/isEmpty'
+
 const FormItem = Form.Item
 
-class LoginForm extends Component {
+class RegisterForm extends Component {
   state = {
   }
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        this.props.onLogin(values)
+        console.log('Received values of form: ', values);
+        this.props.onRegister(values)
       }
     });
   }
@@ -36,7 +38,7 @@ class LoginForm extends Component {
           {
             getFieldDecorator('password', {
               rules: [
-                { required: true, messge: "password required"}
+                { required: true, messge: "confirm password required"}
               ]
             })(
               <Input
@@ -49,14 +51,27 @@ class LoginForm extends Component {
 
         </FormItem>
         <FormItem>
+          {
+            getFieldDecorator('email', {
+              rules: [
+                {required: true, message: "email required"}
+              ]
+            })(<Input
+                placeholder="email"
+                prefix={<Icon type='mail' style={{ color: 'rgba(0,0,0,.25)' }} />}
+              />
+            )
+          }
+        </FormItem>
+        <FormItem>
           <Button
             htmlType="submit"
             type="primary"
-          >Login</Button>
+          >Register</Button>
         </FormItem>
       </Form >
     )
   }
 }
 
-export default Form.create()(LoginForm)
+export default Form.create()(RegisterForm)

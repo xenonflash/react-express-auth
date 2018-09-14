@@ -12,6 +12,7 @@ import Navbar from './components/Navbar'
 import { BrowserRouter as Router} from 'react-router-dom'
 import routes from './routes'
 
+
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk, reduxLogger)))
 
 
