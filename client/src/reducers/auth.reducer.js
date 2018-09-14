@@ -1,17 +1,19 @@
 import { combineReducers } from 'redux'
+import { LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, REGISTER_FAIL, REGISTER_REQUEST, REGISTER_SUCCESS } from '../actions/auth.action'
+
 
 function register(state = {}, action = {}) {
   switch(action.type) {
-    case 'REGISTER_REQUEST':
+    case REGISTER_REQUEST:
       return {
         registering: true,
       }
-    case 'REGISTER_SUCCESS':
+    case REGISTER_SUCCESS:
       return {
         registering: false,
         registerd: true,
       }
-    case 'REGISTER_FAIL':
+    case REGISTER_FAIL:
       return {
         registering: false,
         registerFail: true
@@ -22,16 +24,16 @@ function register(state = {}, action = {}) {
 }
 function login(state = {}, action = {}) {
   switch(action.type){
-    case 'LOGIN_REQUEST':
+    case LOGIN_REQUEST:
       return {
         logging: true,
       }
-    case 'LOGIN_SUCCESS':
+    case LOGIN_SUCCESS:
       return {
         logging: false,
         logined: true,
       }
-    case 'LOGIN_FAIL':
+    case LOGIN_FAIL:
       return {
         logining: false,
         loginFail: true
