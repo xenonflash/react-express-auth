@@ -1,18 +1,9 @@
-import axios from 'axios'
+import { makePost, makeGet } from './_api-helper'
 
 const api = {}
-api.login = param => axios({
-  method: 'post',
-  url: '/api/login',
-  data: param,
-})
-api.getUserInfo = () => axios({
-  method: 'post',
-  url: '/api/getUserInfo'
-})
-api.register = param => axios({
-  method: 'post',
-  url: '/api/register',
-  data: param,
-})
+
+api.login = makePost('/api/login')
+api.getUserInfo = makeGet('/api/getUserInfo')
+api.register = makePost('/api/register')
+
 export default api

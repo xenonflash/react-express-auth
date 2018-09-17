@@ -6,7 +6,8 @@ export function login(formValues) {
     dispatch({type: LOGIN_REQUEST})
     authApi.login(formValues).then(res => {
       dispatch({type: LOGIN_SUCCESS})
-      dispatch({type: SET_USER, user: res})
+      dispatch(getUserInfo())
+      window.localStorage.setItem('tk', res)
     }).catch(err => {
       dispatch({type: LOGIN_FAIL})
     })
@@ -28,8 +29,14 @@ export function getUserInfo() {
     authApi.getUserInfo().then(res => {
       dispatch({type: SET_USER, user: res})
     }).catch(err => {
-
     })
+  }
+}
+
+export function logout() {
+  window.localStorage.removeItem('tk')
+  return {
+    type: LOGOUT
   }
 }
 
@@ -40,3 +47,4 @@ export const REGISTER_REQUEST = Symbol()
 export const REGISTER_SUCCESS = Symbol()
 export const REGISTER_FAIL = Symbol()
 export const SET_USER = Symbol()
+export const LOGOUT = Symbol()
