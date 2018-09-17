@@ -14,7 +14,8 @@ export function makePost(url, options) {
         data,
         ...options
       }).then(res => {
-        if (res.statusCode == 200 && res.data.code === 200) {
+        console.log(res)
+        if (res.status == 200 && res.data.code === 200) {
           resolve(res.data.data)
         } else {
           reject(res.data.data)
@@ -38,7 +39,7 @@ export function makeGet(url, options) {
         params,
         ...options
       }).then(res => {
-        if (res.statusCode == 200 && res.data.code === 200) {
+        if (res.status == 200 && res.data.code === 200) {
           resolve(res.data.data)
         } else {
           reject(res.data.data)

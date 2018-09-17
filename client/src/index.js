@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './api/_interceptor'
 import './index.css';
 import 'antd/dist/antd.min.css'
 import { createStore, applyMiddleware} from 'redux'
