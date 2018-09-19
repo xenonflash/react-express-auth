@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { Col, Row } from 'antd'
-import RegisterForm from './RegisterForm'
+import RegisterForm from '../components/RegisterForm'
 import { connect } from 'react-redux'
 import { register } from '../actions/auth.action'
 

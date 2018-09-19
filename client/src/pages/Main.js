@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import authKeep from '../utils/auth-keep'
 import { connect } from 'react-redux'
+import Chat from '../pages/Chat/Chat'
 
 class Main extends Component{
   state = {
@@ -8,7 +9,10 @@ class Main extends Component{
   }
   render() {
     return (
-      <h1>main</h1>
+      <div>
+        <h1>chat</h1>
+        <Chat/>
+      </div>
     )
   }
 }

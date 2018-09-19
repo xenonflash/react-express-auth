@@ -1,4 +1,5 @@
 import React from 'react'
+import { Avatar } from 'antd'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
@@ -9,7 +10,7 @@ const Component = props => {
   return (
     <div className={'navbar ' + props.className}>
       <Link to="/" className="logo">
-        <img src={logo} />
+        <img src={logo} alt=""/>
       </Link>
       <div className="nav-menu">
         <Link to="/login">Login</Link>
@@ -17,8 +18,8 @@ const Component = props => {
       </div>
       {
         userInfo && <div className="user-menu">
-          <img src="userInfo.avatar"/>
-          <span>{userInfo.name}</span>
+          <Avatar>{userInfo.name[0]}</Avatar>
+          <span>{ userInfo.name }</span>
         </div>
       }
     </div>
@@ -51,7 +52,7 @@ const Navbar = styled(Component)`
 `
 
 const mapStateToProps = state => ({
-  userInfo: state.user
+  userInfo: state.userInfo.user
 })
 
 export default connect(mapStateToProps)(Navbar)

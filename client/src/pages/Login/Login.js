@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import LoginForm from './LoginForm'
+import LoginForm from '../../components/LoginForm'
 import { Row, Col, message } from 'antd'
 import { connect } from 'react-redux';
-import { login } from './../actions/auth.action.js'
+import { login } from '../../actions/auth.action'
 
 class Comp extends Component {
   handleLogin = formValues => {
@@ -24,7 +24,10 @@ class Comp extends Component {
       <Row className={"login " + this.props.className} >
         <Col span={8} offset={8}>
           <h2>Login</h2>
-          <LoginForm onLogin={this.handleLogin}/>
+          <LoginForm
+            onLogin={this.handleLogin}
+            loading={this.props.loginStatus.logining}
+          />
         </Col>
       </Row>
     )

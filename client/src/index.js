@@ -12,7 +12,7 @@ import { Provider } from 'react-redux'
 import Navbar from './components/Navbar'
 import { BrowserRouter as Router} from 'react-router-dom'
 import routes from './routes'
-import { getUserInfo } from './actions/auth.action'
+import { getUserInfo } from './actions/user.action'
 
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk, reduxLogger)))
@@ -25,7 +25,7 @@ if (localStorage.getItem('tk')) {
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-      <div>
+      <div style={{height: '100%'}}>
         <Navbar/>
         { routes }
       </div>

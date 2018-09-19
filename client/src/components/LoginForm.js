@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Input, Button, Form, Icon } from 'antd'
 import _isEmpty from 'lodash/isEmpty'
+
 const FormItem = Form.Item
 
 class LoginForm extends Component {
@@ -52,6 +53,7 @@ class LoginForm extends Component {
           <Button
             htmlType="submit"
             type="primary"
+            loading={this.props.loading}
           >Login</Button>
         </FormItem>
       </Form >

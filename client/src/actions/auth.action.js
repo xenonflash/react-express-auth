@@ -1,5 +1,5 @@
 import authApi from '../api/auth.api.js'
-
+import { getUserInfo } from '../actions/user.action'
 
 export function login(formValues) {
   return dispatch => {
@@ -23,29 +23,20 @@ export function register(formValues) {
     })
   }
 }
-export function getUserInfo() {
-  return dispatch => {
-    authApi.getUserInfo().then(res => {
-      dispatch({type: SET_USER, user: res})
-      dispatch({type: LOGIN_SUCCESS})
-    }).catch(err => {
-      console.log(err)
-    })
-  }
-}
+
 
 export function logout() {
   window.localStorage.removeItem('tk')
+  window.location.replace('/')
   return {
     type: LOGOUT
   }
 }
 
-export const LOGIN_REQUEST = Symbol()
-export const LOGIN_SUCCESS = Symbol()
-export const LOGIN_FAIL = Symbol()
-export const REGISTER_REQUEST = Symbol()
-export const REGISTER_SUCCESS = Symbol()
-export const REGISTER_FAIL = Symbol()
-export const SET_USER = Symbol()
-export const LOGOUT = Symbol()
+export const LOGIN_REQUEST = Symbol('login request')
+export const LOGIN_SUCCESS = Symbol('login success')
+export const LOGIN_FAIL = Symbol('login fail')
+export const REGISTER_REQUEST = Symbol('register request')
+export const REGISTER_SUCCESS = Symbol('register success')
+export const REGISTER_FAIL = Symbol('register fail')
+export const LOGOUT = Symbol('logout')
