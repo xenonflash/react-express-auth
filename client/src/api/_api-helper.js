@@ -14,7 +14,6 @@ export function makePost(url, options) {
         data,
         ...options
       }).then(res => {
-        console.log(res)
         if (res.status == 200 && res.data.code === 200) {
           resolve(res.data.data)
         } else {

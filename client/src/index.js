@@ -12,10 +12,15 @@ import { Provider } from 'react-redux'
 import Navbar from './components/Navbar'
 import { BrowserRouter as Router} from 'react-router-dom'
 import routes from './routes'
+import { getUserInfo } from './actions/auth.action'
 
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk, reduxLogger)))
 
+//判断登录状态
+if (localStorage.getItem('tk')) {
+  store.dispatch(getUserInfo())
+}
 
 ReactDOM.render(
   <Provider store={store}>

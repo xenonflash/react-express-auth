@@ -7,17 +7,20 @@ const auth = {}
 auth.login = function (req, res, next) {
   const username = req.body.username
   const password = req.body.password
-  console.log(username, password)
   if (!username || !password) {
     res.json({
       code: 4000,
       msg: 'param invalid'
     })
   } else {
-    console.log('query', username)
     UserModel.findOne({ name: username }, function (err, user) {
       if (err || !user) {
         res.json({ code: 4001, msg: 'username or password wrong' })
+      } else if(user.password !== password){
+        res.json({
+          code: 4000,
+          msg: 'password or username wrong'
+        })
       } else {
         res.json({
           code: 200,

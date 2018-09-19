@@ -1,19 +1,29 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 const logo = require('../logo.svg')
 
-const Component = props => (
-  <div className={'navbar ' + props.className}>
-    <Link to="/" className="logo">
-      <img src={logo} />
-    </Link>
-    <div className="nav-menu">
-      <Link to="/login">Login</Link>
-      <Link to='/register'>SignUp</Link>
+const Component = props => {
+  const { userInfo } = props
+  return (
+    <div className={'navbar ' + props.className}>
+      <Link to="/" className="logo">
+        <img src={logo} />
+      </Link>
+      <div className="nav-menu">
+        <Link to="/login">Login</Link>
+        <Link to='/register'>SignUp</Link>
+      </div>
+      {
+        userInfo && <div className="user-menu">
+          <img src="userInfo.avatar"/>
+          <span>{userInfo.name}</span>
+        </div>
+      }
     </div>
-  </div>
-)
+  )
+}
 
 const Navbar = styled(Component)`
   position: fixed;
@@ -40,4 +50,8 @@ const Navbar = styled(Component)`
   }
 `
 
-export default Navbar
+const mapStateToProps = state => ({
+  userInfo: state.user
+})
+
+export default connect(mapStateToProps)(Navbar)

@@ -27,6 +27,7 @@ export function getUserInfo() {
   return dispatch => {
     authApi.getUserInfo().then(res => {
       dispatch({type: SET_USER, user: res})
+      dispatch({type: LOGIN_SUCCESS})
     }).catch(err => {
       console.log(err)
     })

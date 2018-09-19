@@ -7,7 +7,6 @@ import { register } from '../actions/auth.action'
 
 class Comp extends Component{
   handleRegister = formValues => {
-    console.log(formValues)
     this.props.dispatch(register(formValues))
   }
   render() {
