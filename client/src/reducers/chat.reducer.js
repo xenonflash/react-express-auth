@@ -2,6 +2,7 @@ import {
   SENDING_MSG,
   SEND_MSG_SUCCESS,
   SEND_MSG_FAIL,
+  RECEIVE_MSG,
   WS_CONNECT_SUCCESS,
   WS_DISCONNECTED
 } from '../actions/chat.action'
@@ -24,17 +25,30 @@ export default function(state = initState, action = {}) {
         wsConnected: false
       }
     case SENDING_MSG:
-      const chatHistory= _cloneDeep(state.chatHistory || {})
-      const msg = action.msg
-      if(chatHistory[msg.to]){
-        chatHistory[msg.to].push(msg)
+    const ch1 = _cloneDeep(state.chatHistory)
+    const msg1 = action.msg
+    if(ch1[msg1.to]){
+      ch1[msg1.to].push(msg1)
+    } else {
+      ch1[msg1.to] = [msg1]
+    }
+    return {
+      ...state,
+      chatHistory: ch1
+    }
+    case RECEIVE_MSG:
+      const ch2 = _cloneDeep(state.chatHistory)
+      const msg2 = action.msg
+      if(ch2[msg2.from]){
+        ch2[msg2.from].push(msg2)
       } else {
-        chatHistory[msg.to] = [msg]
+        ch2[msg2.from] = [msg2]
       }
       return {
         ...state,
-        chatHistory
+        chatHistory: ch2
       }
+
     default:
       return state
   }

@@ -25,6 +25,15 @@ initDb(CONFIG.mongo).then(res => {
       // const msg = JSON.parse(e)
       console.log('received', e)
       socket.emit('msg', e)
+      // simulate feedback
+      setTimeout(() => {
+        socket.emit('server-push', {
+          from: '2324',
+          to: '5ba2706faaa8c62549cdfc01',
+          time: +(Date.now()),
+          msg: '我现在不在'
+        })
+      }, 2000);
     })
   })
   server.listen(CONFIG.port, () => {console.log('statred at 8080')})

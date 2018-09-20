@@ -8,7 +8,7 @@ const ws = {
     if (_isEmpty(options) && !this.ws) {
       return console.log('please init ws')
     }
-    const { url = '', connect, disconnect, error } = options
+    const { url = '', connect, disconnect, error, serverPush } = options
     if (this.ws) return this.ws
     this.ws = io(url)
     this.onMsgQueue = []
@@ -25,6 +25,9 @@ const ws = {
       this.onMsgQueue.forEach(callback => {
         callback(e)
       })
+    })
+    this.ws.on('server-push', e => {
+      serverPush && serverPush(e)
     })
     window.__ws = this.ws
   }

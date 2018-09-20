@@ -15,6 +15,9 @@ export function sendMsg(msg) {
     })
   }
 }
+export function msgReceived(msg) {
+  return {type: RECEIVE_MSG, msg}
+}
 
 export function setWsStatus(statusCode) {
   const type = [WS_CONNECT_SUCCESS, WS_CONNECT_FAIL, WS_DISCONNECTED][statusCode]
@@ -24,6 +27,7 @@ export function setWsStatus(statusCode) {
 export const SENDING_MSG = Symbol('send msg ing')
 export const SEND_MSG_SUCCESS = Symbol('send msg success')
 export const SEND_MSG_FAIL = Symbol('send msg fail')
+export const RECEIVE_MSG = Symbol('receive a message')
 
 export const WS_CONNECT_SUCCESS = Symbol('websocket connect success')
 export const WS_CONNECT_FAIL = Symbol('websocket connect fail')
