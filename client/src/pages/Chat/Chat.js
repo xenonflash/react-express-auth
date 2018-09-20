@@ -42,7 +42,14 @@ class Chat extends Component{
   }
   handleSend = e => {
     const { activeChat, chatText } = this.state
-    this.props.dispatch(sendMsg(this.state.activeChat, chatText))
+    const { userInfo } = this.props
+    const msg = {
+      from: userInfo._id,
+      to: activeChat,
+      time: +Date.now(),
+      msg: chatText
+    }
+    this.props.dispatch(sendMsg(msg))
   }
   getUserItem = item => {
     return (
@@ -58,7 +65,9 @@ class Chat extends Component{
     )
   }
   render() {
-    const { contacts, chatHistory, className} = this.props
+    const { contacts, chatHistory, className, userInfo} = this.props
+    const { activeChat } = this.state
+    const currentChatHistory = chatHistory[activeChat]
     return (
       <div className={"chat-container " + className}>
         <div className="user-list-col">
@@ -71,9 +80,18 @@ class Chat extends Component{
         </div>
         <div className="chat-area-col">
         {
-          this.state.activeChat ? <div>
-            <div className="chat-panel"></div>
-            <div>
+          this.state.activeChat ? <div className="chat-interactive-panel">
+            <div className="chat-panel">
+              {
+                currentChatHistory && currentChatHistory.map(chat => (
+                  <div className={`chatItem ${chat.from === userInfo.id ? 'self' : 'other'}`} key={chat.id}>
+                    <p style={{fontSize: '12px'}}>{chat.time}</p>
+                    <p>{chat.msg}</p>
+                  </div>
+                ))
+              }
+            </div>
+            <div className="chat-input">
               <Input name="chatText" onChange={ this.handleInput }/>
               <Button onClick={this.handleSend}>send</Button>
             </div>
@@ -104,14 +122,32 @@ const Styled = styled(Chat)`
     }
   }
   .chat-area-col{
-    flex: 2
+    flex: 2;
+    .chat-interactive-panel{
+      height: 100%
+      position: relative;
+    }
+    .chat-panel{
+      padding: 15px;
+      border-radius: 10px;
+      border: 2px solid #eee;
+      height: 100%;
+      padding-bottom: 80px;
+    }
+    .chat-input{
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+    }
   }
 
 `
 
 const mapStateToProps = state => ({
   contacts: state.userInfo.contacts,
-  // chatHistory: state.chat.history
+  userInfo: state.userInfo.user,
+  chatHistory: state.chat.chatHistory
 })
 
 export default connect(mapStateToProps)(Styled)

@@ -56,26 +56,24 @@ export function makeGet(url, options) {
  * @param {Any} payload
  * @param {Number}
  */
-export function sendWs(payload, timeout = 10000) {
+export function sendWs(msg, timeout = 10000) {
   //为每个信息生成唯一id, 回调中通过id 匹配 resolve Promise
-  const id = +(Date.now()) + JSON.stringify(payload)
+  const id = +(Date.now()) + JSON.stringify(msg)
   const type = 'chat'
-  const msg = {...payload, id, type}
+  const payload = {...msg, id, type}
   return new Promise((resolve, reject) => {
     const handler = function(res) {
       if (res.id === id) {
         const idx = ws.onMsgQueue.findIndex(h => h.id === id)
         ws.onMsgQueue.splice(idx, 1);
-        console.log(`server received ${id}`)
-        resolve(msg)
+        resolve({...msg, status: 1})
       }
     }
     handler.id = id
     ws.onMsgQueue.push(handler)
-    ws.ws.emit('msg', msg)
-    console.log(`msg ${id} sent`)
+    ws.ws.emit('msg', payload)
     setTimeout(() => {
-      reject()
+      reject({...msg, status: 0})
     }, timeout);
   })
 }

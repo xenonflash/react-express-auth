@@ -5,16 +5,13 @@ import chatApi from '../api/chat.api'
  * @param {*} dist 对方ID
  * @param {*} msg 信息内容
  */
-export function sendMsg(dist, msg) {
+export function sendMsg(msg) {
   return dispatch => {
-    dispatch({type: SENDING_MSG})
-    const param = {
-      dist, msg
-    }
-    chatApi.sendMsg(param).then(res => {
+    dispatch({type: SENDING_MSG, msg})
+    chatApi.sendMsg(msg).then(res => {
       dispatch({type: SEND_MSG_SUCCESS, msg})
     }).catch(err => {
-      dispatch({type: SEND_MSG_FAIL})
+      dispatch({type: SEND_MSG_FAIL, msg})
     })
   }
 }
